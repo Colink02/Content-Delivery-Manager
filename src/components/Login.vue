@@ -12,14 +12,12 @@ export default {
 <template>
   <div class="outer-login">
     <div v-if="!isLoggedIn" class="loginBox">
-      <img src="https://via.placeholder.com/600x200" class="login-banner" />
+      <img src="https://via.placeholder.com/600x200?text=Content Manager" class="login-banner" />
       <div class="inner-login">
         <h2>Sign in</h2>
         <form>
-          <label for="username">Username</label><br />
-          <input type="username" name="username" id="username" /><br />
-          <label for="username">Password</label><br />
-          <input type="password" name="password" id="password" />
+          <input type="username" name="username" id="username" placeholder="Username" /><br />
+          <input type="password" name="password" id="password" placeholder="Password" />
           <br />
           <div class="submit-container">
             <input type="submit" value="Login" />
@@ -49,8 +47,10 @@ p {
   width: 600px;
   height: 550px;
   text-align: center;
-  background-color: #00b6ff;
+  background-color: #dd6962;
   font-family: "Kanit", sans-serif;
+  margin: auto auto;
+  border-radius: 10px;
 }
 .inner-login {
   margin: auto 130px;
@@ -59,9 +59,10 @@ p {
 .loginBox label,
 h2 {
   text-align: left;
+  margin-bottom: 56px;
 }
 #password {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 input {
   border: none;
@@ -73,8 +74,11 @@ input[type="password"] {
   font-family: "Kanit", sans-serif;
   margin-bottom: 10px;
 }
+input:focus {
+    border: none;
+}
 input[type="submit"] {
-    display: flex;
+  display: flex;
   background-color: #e1f5fe;
   padding: 10px 20px;
   border-radius: 5px;

@@ -17,7 +17,20 @@ import Login from "./components/Login.vue";
 </template>
 
 <style>
-  body {
+  html, body {
     background-color: #b1e0e2;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
+  #login-page {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+  #app {
+    height: 100%;
   }
 </style>
