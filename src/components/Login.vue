@@ -1,12 +1,36 @@
 <script lang="ts">
+import { mapActions } from "pinia";
 import { RouterLink, RouterView } from "vue-router";
 
 export default {
   data: function () {
     return {
       isLoggedIn: false,
+      form: {
+        username: "",
+        password: "",
+      },
+      invalid: false
     };
   },
+  methods: {
+    ...mapActions("LogIn"),
+    async submit() {
+      const user = new FormData();
+      user.append("username", this.form.username);
+      user.append("password", this.form.password);
+      try {
+        await this.LogIn(user);
+        this.$router.push("/manage");
+        this.invalid = false;
+      } catch(error) {
+        this.invalid = true;
+      }
+    },
+    login: function() {
+      this.isLoggedIn = true;
+    }
+  }
 };
 </script>
 <template>
@@ -15,13 +39,14 @@ export default {
       <img src="https://via.placeholder.com/600x200?text=Content Manager" class="login-banner" />
       <div class="inner-login">
         <h2>Sign in</h2>
-        <form>
+        <form @submit.prevent="submit">
           <input type="username" name="username" id="username" placeholder="Username" /><br />
           <input type="password" name="password" id="password" placeholder="Password" />
           <br />
           <div class="submit-container">
-            <input type="submit" value="Login" />
+            <input type="submit" value="Login" v-on:click="login" />
           </div>
+          <div v-if="invalid"><span>Invalid Username or Password</span></div>
         </form>
       </div>
     </div>

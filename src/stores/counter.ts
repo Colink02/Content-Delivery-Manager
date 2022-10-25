@@ -1,12 +1,13 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore("counter", () => {
-  const count = ref(0);
-  const doubleCount = computed(() => count.value * 2);
-  function increment() {
-    count.value++;
-  }
+export const useCounterStore = defineStore("LogIn", {
+  actions: {
+    login: async (user: FormData) => {
+      console.log("Log in called: with " + user.get("username") + " and " + user.get("password"));
+    },
+    logout: async () => {
 
-  return { count, doubleCount, increment };
+    }
+  }
 });
