@@ -1,19 +1,21 @@
 <script lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import Login from "./components/Login.vue";
+import Dashboard from "./views/Dashboard.vue";
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
   export default {
     components: {
-      Login
+      Login,
+      Dashboard
     }
   }
 
 </script>
 
 <template>
-  <div id="login-page">
-    <Login />
-  </div>
+  <Dashboard />
 </template>
 
 <style>
