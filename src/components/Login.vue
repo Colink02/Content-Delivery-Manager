@@ -14,13 +14,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions("LogIn"),
+    //...mapActions("LogIn"),
     async submit() {
       const user = new FormData();
       user.append("username", this.form.username);
       user.append("password", this.form.password);
       try {
-        await this.LogIn(user);
+        //await this.LogIn(user);
         this.$router.push("/manage");
         this.invalid = false;
       } catch(error) {
