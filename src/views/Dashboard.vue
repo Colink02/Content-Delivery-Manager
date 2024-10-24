@@ -2,7 +2,7 @@
 export default {};
 </script>
 <template>
-  <nav class="navbar navbar-expand-lg bg-light">
+  <nav class="navbar navbar-expand-lg bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Dashboard</a>
       <button
@@ -56,7 +56,7 @@ export default {};
   width: 100%;
 }
 #main-content {
-  flex: 1 0 content;  
+  flex: 1 0 content;
   display: flex;
   height: 100%;
 }
@@ -66,11 +66,11 @@ export default {};
   padding: 25px;
   height: 100%;
   width: 25%;
-  box-shadow: inset 3px 0px rgba(0,0,0,0.25);
+  box-shadow: inset 3px 0px rgba(0, 0, 0, 0.25);
 }
 #file-details h1 {
   text-align: center;
-  color: #78909C;
+  color: #78909c;
 }
 #file-list {
   display: flex-inline;

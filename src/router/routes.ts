@@ -1,9 +1,9 @@
-import Dashboard from '@/views/Dashboard.vue';
+import Dashboard from "@/views/Dashboard.vue";
 
 export default [
-    {
-        path: "/dashboard",
-        name: "dashboard",
-        component: Dashboard
-    }
-]
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: Dashboard,
+  },
+];
