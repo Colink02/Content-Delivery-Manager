@@ -1,0 +1,20 @@
+- Add permissions
+- Add group permissions
+- Add file details
+	- Show Hashes
+	- Add Description field / Notes field
+	- Show date created
+	- Show last updated
+	- Show file size
+	- Add Minecraft world folder details
+		- Preview should be a rendered map of spawn
+		- 
+	- Add Minecraft resource pack file details
+		- Minecraft version
+		- Pack name
+		- Preview should be pack image
+- Add version control for files
+
+
+- Future
+	- Show activity of the file (version control)
