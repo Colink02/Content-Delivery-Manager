@@ -1,6 +1,6 @@
 <script lang="ts">
 import Login from "./components/Login.vue";
-import Dashboard from "./views/Dashboard.vue";
+import Dashboard from "./views/DashboardPage.vue";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
