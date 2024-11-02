@@ -10,7 +10,7 @@ export default {
         username: "",
         password: "",
       },
-      invalid: false
+      invalid: false,
     };
   },
   methods: {
@@ -23,25 +23,38 @@ export default {
         //await this.LogIn(user);
         this.$router.push("/manage");
         this.invalid = false;
-      } catch(error) {
+      } catch (error) {
         this.invalid = true;
       }
     },
-    login: function() {
+    login: function () {
       this.isLoggedIn = true;
-    }
-  }
+    },
+  },
 };
 </script>
 <template>
   <div class="outer-login">
     <div v-if="!isLoggedIn" class="loginBox">
-      <img src="https://via.placeholder.com/600x200?text=Content Manager" class="login-banner" />
+      <img
+        src="https://via.placeholder.com/600x200?text=Content Manager"
+        class="login-banner"
+      />
       <div class="inner-login">
         <h2>Sign in</h2>
         <form @submit.prevent="submit">
-          <input type="username" name="username" id="username" placeholder="Username" /><br />
-          <input type="password" name="password" id="password" placeholder="Password" />
+          <input
+            type="username"
+            name="username"
+            id="username"
+            placeholder="Username"
+          /><br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+          />
           <br />
           <div class="submit-container">
             <input type="submit" value="Login" v-on:click="login" />
@@ -100,7 +113,7 @@ input[type="password"] {
   margin-bottom: 10px;
 }
 input:focus {
-    border: none;
+  border: none;
 }
 input[type="submit"] {
   display: flex;
@@ -116,9 +129,9 @@ input[type="submit"] {
   height: 200px;
 }
 .submit-container {
-    display: flex;
-    width: 100%;
-    text-align: right;
-    justify-content: right;
+  display: flex;
+  width: 100%;
+  text-align: right;
+  justify-content: right;
 }
 </style>
