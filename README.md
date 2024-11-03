@@ -1,14 +1,12 @@
 # content-delivery-manager
 
-[ ] - Upload files by drag and drop
-[ ] - Create new text files easily
-[ ] - Right Click Menu
-   [ ] - Copy
-   [ ] - Paste
-   [ ] - View Analytics
-[ ] - Settings
-   [ ] - 
-[ ] - 
+- [ ] Upload files by drag and drop
+- [ ] Create new text files easily
+- [ ] Right Click Menu
+  - [ ] Copy
+  - [ ] Paste
+  - [ ] View Analytics
+- [ ] Settings
 
 ## Customize configuration
 
