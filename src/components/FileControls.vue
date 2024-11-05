@@ -8,9 +8,9 @@
 
 <template>
 <div class="file-controls">
-  <div class="file-controls-selection" v-if="selectedItems.length > 0">
-    <span>{{ selectedItems }} selected</span>
-  </div>
+  <span class="file-controls-selection" v-if="selectedItems.length > 0">
+    <span>{{ useViewState().selectedFileNames }} selected</span>
+  </span>
   <div class="file-controls-right">
     <a href="#" @click="toggleDetails()">
       <img src="/icons/info.svg" alt="details" :class='["icon", useViewState().showDetails && "icon-active"]'>
@@ -22,6 +22,8 @@
 <style scoped>
 .file-controls {
   height: 65px;
+  width: 100%;
+  display: inline-block;
   padding: 15px 25px;
 }
 .icon {
@@ -32,8 +34,13 @@
   border-radius: 50%;
   color: black;
 }
+.file-controls-selection {
+  clear: right;
+  line-height: 2em;
+  font-weight: bold;
+  display: inline-block;
+}
 .file-controls-right {
-  text-align: right;
-  display: block;
+  float: right;
 }
 </style>
