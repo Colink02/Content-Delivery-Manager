@@ -4,15 +4,18 @@ import FolderView from "@/components/FolderView.vue";
 import FileDetailsComponent from "@/components/FileDetailsComponent.vue";
 import FileSystemView from "@/components/FileSystemView.vue";
 import FileControls from "@/components/FileControls.vue";
+import { useViewState } from "@/stores/view_state";
 
 function allowDrop(e) {
   e.preventDefault();
   e.dataTransfer.effectAllowed = "copy";
 }
+function removeSelectedItems() {
+  console.log("Removing selected items");
+  useViewState().clearSelection();
+}
 
 async function uploadFile(file: File) {}
-
-import { useViewState } from "@/stores/view_state";
 
 export default {
   components: {
@@ -26,18 +29,19 @@ export default {
     useViewState,
     allowDrop,
     uploadFile,
+    removeSelectedItems
   },
 };
 </script>
 <template>
-  <div @dragenter="allowDrop" @drag="uploadFile"></div>
+  <div @dragenter="allowDrop" @drag="uploadFile" @mouseup="removeSelectedItems"></div>
   <div id="main-content">
     <div id="content">
       <div id="header">
         <FileSystemView></FileSystemView>
-        <FileControls selected-items="" />
+        <FileControls :selected-items="useViewState().selectedFiles" />
       </div>
-      <div id="explorer-view">
+      <div id="explorer-view" @mouseup="removeSelectedItems">
         <FolderView id="folder-list"></FolderView>
         <FileView id="file-list"></FileView>
       </div>
@@ -66,7 +70,7 @@ export default {
   color: white;
 }
 #explorer-view {
-  height: 87%;
+  height: 86%;
   flex-direction: column;
   display: flex;
   overflow-y: scroll;
