@@ -8,7 +8,9 @@ import java.util.Objects;
 public final class MinecraftWorldFolderType implements FolderType {
     public boolean isType(File directory) {
         if(!directory.isDirectory()) return false;
-        for(File file: Objects.requireNonNull(directory.listFiles())) {
+        File[] files;
+        if((files = directory.listFiles()) == null) return false;
+        for(File file: files) {
             if(file.getName().equalsIgnoreCase("level.dat")) {
                 return true;
             }
