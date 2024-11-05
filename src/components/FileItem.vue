@@ -16,16 +16,37 @@ const props = defineProps(["file_type_icon", "file_name", "preview_image_url"]);
 // function ondrag(e: DragEvent) {
 //   console.log("dragging: ", e.clientX, e.clientY);
 // }
+const hashCode = function(s) {
+  return s.split("").reduce(function(a, b) {
+    a = ((a << 5) - a) + b.charCodeAt(0);
+    return a & a;
+  }, 0);
+}
 
 function handleSelect(e: MouseEvent) {
-  useViewState().addSelectItem(props.file_name);
+  useViewState().addSelectItem({
+    "hash": hashCode(props.file_name),
+    "name": props.file_name,
+  });
+}
+
+function isSelected() {
+  let found = false;
+  useViewState().selectedFiles.forEach((file) => {
+      if(file.hash === hashCode(props.file_name)) {
+        found = true;
+      }
+    }
+  );
+  return found;
+
 }
 </script>
 
 <template>
   <div
     class="file"
-    :class="{selected: useViewState().selectedFiles.includes(props.file_name)}"
+    :class="{selected: isSelected(), unselected: !isSelected()}"
     ref="file-ref"
     @click="handleSelect"
     draggable="true"
@@ -39,7 +60,7 @@ function handleSelect(e: MouseEvent) {
       />
       <span class="file-name">{{ file_name }}</span>
     </div>
-    <img class="file-preview" :src="preview_image_url" alt="Preview of file" />
+    <img class="file-preview" :src="preview_image_url ? preview_image_url : file_type_icon" alt="Preview of file" />
   </div>
 </template>
 
@@ -72,8 +93,18 @@ function handleSelect(e: MouseEvent) {
   margin-top: 7px;
 }
 
+.file-preview {
+  width: 100%;
+  object-position: center;
+  height: 200px;
+}
+
 .selected {
-  border: #b1e0e2 solid 1px;
+  border: #b1e0e2 solid 2px;
+}
+
+.unselected {
+  border: transparent solid 2px;
 }
 
 </style>
