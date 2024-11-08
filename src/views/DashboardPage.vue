@@ -46,12 +46,14 @@ export default {
         <FileView id="file-list"></FileView>
       </div>
     </div>
+    <Transition name="slide">
     <FileDetailsComponent
       id="file-details"
       file_type_icon="https://placehold.co/64"
       file_name="test.txt"
       v-if="useViewState().showDetails"
     ></FileDetailsComponent>
+    </Transition>
     <!--    <div id="file-details">-->
     <!--      <h1>File Details</h1>-->
     <!--    </div>-->
@@ -85,5 +87,30 @@ export default {
 }
 #header {
   clear: right;
+}
+
+#file-details {
+  transition-property: width;
+  transition-timing-function: cubic-bezier(0.4,0,1,1);
+  will-change: width;
+  overflow: hidden;
+  width: 375px;
+  transition: width 0.5s ease-in-out;
+}
+
+#file-details.slide-enter-active, #file-details.slide-leave-active {
+  transition: width 0.5s ease-in-out;
+}
+#file-details.slide-enter-from {
+  width: 0;
+}
+
+#file-details.slide-enter-to {
+  //transform: translateX(0);
+  width: 375px;
+}
+#file-details.slide-leave-to {
+  //transform: translateX(100%);
+  width: 0;
 }
 </style>

@@ -25,7 +25,6 @@ function handleSelect() {
 }
 
 function isSelected() {
-  let found = false;
   // for(const file in selectedFilesAndFolders.value) {
   //     if(selectedFilesAndFolders.value[file].type === "file") {
   //       if(props.id in selectedFilesAndFolders.value) {

@@ -21,14 +21,20 @@ function generateId () {
   return uuid();
 }
 
+function setTransitionDelays(el: Element) {
+  el.style.transitionDelay = `${el.getAttribute("index") * 0.01}s`;
+}
+
 </script>
 
 <template>
   <div class="folder-view">
     <h4>Folders</h4>
     <div class="folders">
-      <folder-item :folder_name="folder.name" folder_icon="/icons/folder.svg" :id="generateId()" v-for="folder in folders" :key="folder.name" >
-      </folder-item>
+      <TransitionGroup name="fade-in" @beforeEnter="setTransitionDelays">
+        <folder-item :folder_name="folder.name" folder_icon="/icons/folder.svg" :id="generateId()" v-for="(folder, index) in folders" :key="folder.name" v-bind:index="index" >
+        </folder-item>
+      </TransitionGroup>
     </div>
   </div>
 </template>
@@ -43,4 +49,13 @@ function generateId () {
 .folder-view {
   margin: 16px;
 }
+.fade-in-enter-active,
+.fade-in-leave-active {
+  transition: all 0.5s ease;
+}
+.fade-in-enter-from,
+.fade-in-leave-to {
+  opacity: 0;
+}
+
 </style>
