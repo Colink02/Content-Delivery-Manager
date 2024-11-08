@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useViewState } from "@/stores/view_state";
+import { storeToRefs } from "pinia";
 
-const props = defineProps(["file_type_icon", "file_name", "preview_image_url"]);
+const props = defineProps(["file_type_icon", "file_name", "preview_image_url", "id"]);
+
+const { selectedFilesAndFolders } = storeToRefs(useViewState());
 // const dragItem = useTemplateRef("draggableItem");
 // //TODO cleanup and get drag and drop element to show up with correct info when the user drags a file
 //
@@ -16,30 +19,22 @@ const props = defineProps(["file_type_icon", "file_name", "preview_image_url"]);
 // function ondrag(e: DragEvent) {
 //   console.log("dragging: ", e.clientX, e.clientY);
 // }
-const hashCode = function(s) {
-  return s.split("").reduce(function(a, b) {
-    a = ((a << 5) - a) + b.charCodeAt(0);
-    return a & a;
-  }, 0);
-}
 
-function handleSelect(e: MouseEvent) {
-  useViewState().addSelectItem({
-    "hash": hashCode(props.file_name),
-    "name": props.file_name,
-  });
+function handleSelect() {
+  useViewState().addSelectedItem(props.id, "file", false);
 }
 
 function isSelected() {
   let found = false;
-  useViewState().selectedFiles.forEach((file) => {
-      if(file.hash === hashCode(props.file_name)) {
-        found = true;
-      }
-    }
-  );
-  return found;
-
+  // for(const file in selectedFilesAndFolders.value) {
+  //     if(selectedFilesAndFolders.value[file].type === "file") {
+  //       if(props.id in selectedFilesAndFolders.value) {
+  //         found = true;
+  //         break;
+  //       }
+  //     }
+  // }
+  return props.id in selectedFilesAndFolders.value;
 }
 </script>
 

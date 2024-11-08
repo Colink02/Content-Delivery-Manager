@@ -1,15 +1,24 @@
 <script setup lang="ts">
   import { useViewState } from "@/stores/view_state";
+  import { storeToRefs } from "pinia";
   defineProps(["selectedItems"]);
+
+  const { selectedFilesAndFolders } = storeToRefs(useViewState());
+
   function toggleDetails() {
     useViewState().toggleDetails();
   }
+
+  function getSelectedItemsCount() {
+    return Object.keys(selectedFilesAndFolders.value).length;
+  }
+
 </script>
 
 <template>
 <div class="file-controls">
-  <span class="file-controls-selection" v-if="selectedItems.length > 0">
-    <span>{{ useViewState().selectedFileNames }} selected</span>
+  <span class="file-controls-selection" v-if="getSelectedItemsCount() > 0">
+    <span>{{ getSelectedItemsCount() }} selected</span>
   </span>
   <div class="file-controls-right">
     <a href="#" @click="toggleDetails()">

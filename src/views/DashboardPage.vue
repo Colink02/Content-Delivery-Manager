@@ -39,7 +39,7 @@ export default {
     <div id="content">
       <div id="header">
         <FileSystemView></FileSystemView>
-        <FileControls :selected-items="useViewState().selectedFiles" />
+        <FileControls />
       </div>
       <div id="explorer-view">
         <FolderView id="folder-list"></FolderView>

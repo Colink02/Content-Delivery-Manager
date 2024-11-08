@@ -1,25 +1,32 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { useViewState } from "@/stores/view_state";
+import { storeToRefs } from "pinia";
 
-defineProps(["folder_icon", "folder_name"]);
+const props = defineProps(["folder_icon", "folder_name", "id"]);
 
-let isSelected = ref(false);
+const state = useViewState();
+const {
+  selectedFilesAndFolders,
+} = storeToRefs(state);
+
+let isSelected = () => {
+  return props.id in selectedFilesAndFolders.value;
+};
 
 function toggleSelect(event: MouseEvent) {
   if(event.detail == 1) {
-    console.log("Selecting..");
-    isSelected.value = !isSelected.value;
-    console.log("Selected: ", isSelected.value);
+    console.log("Selecting..", props.id);
+    useViewState().addSelectedItem(props.id, "folder", false);
   } else if(event.detail == 2) {
     //TODO open the folder
-    useViewState()
+    useViewState().openFile(props.id);
   }
 }
 
 </script>
 
 <template>
-  <div class="folder" @click="toggleSelect" :class="{selected: isSelected}">
+  <div class="folder" @click="toggleSelect" :class="{selected: isSelected()}" v>
     <img :src="folder_icon" alt="Folder" class="folder-icon" />
     {{ folder_name }}
   </div>
