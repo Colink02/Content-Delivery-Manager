@@ -19,7 +19,7 @@ function removeSelectedItems() {
 </script>
 
 <template>
-  <div class="folder-view" @mouseup="removeSelectedItems">
+  <div class="folder-view">
     <h4>Folders</h4>
     <div class="folders">
       <folder-item :folder_name="folder.name" folder_icon="/icons/folder.svg"  v-for="folder in folders" :key="folder.name">
