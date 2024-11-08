@@ -34,14 +34,14 @@ export default {
 };
 </script>
 <template>
-  <div @dragenter="allowDrop" @drag="uploadFile" @mouseup="removeSelectedItems"></div>
+  <div @dragenter="allowDrop" @drag="uploadFile"></div>
   <div id="main-content">
     <div id="content">
       <div id="header">
         <FileSystemView></FileSystemView>
         <FileControls :selected-items="useViewState().selectedFiles" />
       </div>
-      <div id="explorer-view" @mouseup="removeSelectedItems">
+      <div id="explorer-view">
         <FolderView id="folder-list"></FolderView>
         <FileView id="file-list"></FileView>
       </div>
