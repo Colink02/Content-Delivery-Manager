@@ -15,7 +15,7 @@
    3. Video formats (.avi, .mp4, etc.)
    4. Audio formats (.mp3, .m4a, etc.)
 4. Support to convert formats within right click menu (advanced settings for ffmpeg?)
-5. 
+5. Support for private files, folders, accounts, SAML auth, and Passkey security
 
 # TODO Major Features
 - [ ] Upload files by drag and drop
