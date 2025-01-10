@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { useViewState } from "@/stores/view_state";
+import { storeToRefs } from "pinia";
+
+const { selectedFilesAndFolders } = storeToRefs(useViewState());
+
 function closeDetails() {
   useViewState().toggleDetails();
 }

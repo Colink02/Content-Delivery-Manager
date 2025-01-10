@@ -19,14 +19,14 @@ function toggleSelect(event: MouseEvent) {
     useViewState().addSelectedItem(props.id, "folder", false);
   } else if(event.detail == 2) {
     //TODO open the folder
-    useViewState().openFile(props.id);
+    useViewState().open(props.id);
   }
 }
 
 </script>
 
 <template>
-  <div class="folder" @click="toggleSelect" :class="{selected: isSelected()}" v>
+  <div class="folder" @click="toggleSelect" :class="{selected: isSelected()}">
     <img :src="folder_icon" alt="Folder" class="folder-icon" />
     {{ folder_name }}
   </div>

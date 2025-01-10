@@ -5,9 +5,11 @@ import FileDetailsComponent from "@/components/FileDetailsComponent.vue";
 import FileSystemView from "@/components/FileSystemView.vue";
 import FileControls from "@/components/FileControls.vue";
 import { useViewState } from "@/stores/view_state";
+import FileExplorer from "@/components/FileExplorer.vue";
 
-function allowDrop(e) {
+function allowDrop(e: DragEvent) {
   e.preventDefault();
+  if(e.dataTransfer == null) return;
   e.dataTransfer.effectAllowed = "copy";
 }
 function removeSelectedItems() {
@@ -19,6 +21,7 @@ async function uploadFile(file: File) {}
 
 export default {
   components: {
+    FileExplorer,
     FileControls,
     FileSystemView,
     FileDetailsComponent,
@@ -41,10 +44,7 @@ export default {
         <FileSystemView></FileSystemView>
         <FileControls />
       </div>
-      <div id="explorer-view">
-        <FolderView id="folder-list"></FolderView>
-        <FileView id="file-list"></FileView>
-      </div>
+      <FileExplorer />
     </div>
     <Transition name="slide">
     <FileDetailsComponent

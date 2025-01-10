@@ -1,16 +1,12 @@
 package com.colink02dev.Content_Management_Server;
 
 import com.colink02dev.Content_Management_Server.utils.FileUtils;
-import com.nimbusds.jose.shaded.gson.JsonObject;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
@@ -29,18 +25,19 @@ public class ContentManagementServerApplication {
 
 
 	@GetMapping("/files")
-	public void getFiles(HttpServletResponse response, String directory) throws IOException {
-		response.addHeader("Access-Control-Allow-Origin", "*");
+	public void getFiles(HttpServletResponse response, @RequestParam String directory) throws IOException {
 		// TODO prevent directory traversal attacks using ../ ./ or absolute paths /
-		if(directory == null || directory.isEmpty()) {
 			if(baseFilePath.toFile().isDirectory()) {
+				response.addHeader("Access-Control-Allow-Origin", "*");
 				response.setContentType("application/json");
-				response.getWriter().write(FileUtils.getFiles(baseFilePath.toFile().listFiles()).toString());
-				return;
+				Path path = baseFilePath;
+				if (directory != null) {
+					path = path.resolve(directory);
+				}
+				response.getWriter().write(FileUtils.getFiles(path.toFile().listFiles()).toString());
 			}
-		}
-		response.setContentType("application/json");
-		response.getWriter().write("Error");
+		// response.setContentType("application/json");
+		// response.getWriter().write("Error");
 	}
 
 

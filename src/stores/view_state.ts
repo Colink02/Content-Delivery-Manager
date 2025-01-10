@@ -1,16 +1,40 @@
 import { defineStore } from "pinia";
 
+type ItemData = {
+  type: string;
+  id: string;
+};
+type FileSystem = {
+  folders: {
+    name: string;
+    special_types: Array<string>;
+  }[],
+  files: {
+     name: string;
+  }[]
+}
+type StoreData = {
+  showDetails: boolean;
+  currentPath: string;
+  selectedItems: ItemData[];
+  items: FileSystem;
+}
 export const useViewState = defineStore("AppState", {
-  state: () => ({ showDetails: true, selectedItems: {} }),
+  state: () => ({
+    showDetails: true,
+    currentPath: "",
+    selectedItems: {},
+    items: {}
+  } as StoreData),
   getters: {
     selectedFileNames: (state) => {
-      console.log(typeof state.selectedFiles);
-      console.log(state.selectedFiles);
-      // return state.selectedItems.map(file => file.name).join(" ");
-      return "NOT IMPLEMENTED";
+      return state.showDetails;
     },
     selectedFilesAndFolders: (state) => {
       return state.selectedItems;
+    },
+    currentPathString: (state) => {
+      return state.currentPath;
     }
   },
   actions: {
@@ -19,27 +43,30 @@ export const useViewState = defineStore("AppState", {
     },
     addSelectedItem(id: string, type: string, allowMultiple: boolean = false) {
       if(!allowMultiple) {
-        console.log("Not allowing multiple");
-        const oldFolders = {};
-        Object.assign(oldFolders, this.selectedItems);
-        this.selectedItems = {};
-        if(id in oldFolders) {
-          console.log("Clearing and pushing");
-        } else {
-          console.log("Adding ", type);
-          this.selectedItems[id] = { "type": type };
-        }
+        this.selectedItems.length = 0;
+        this.selectedItems.push({id, type });
       } else {
-        if(this.selectedItems.includes(id)) {
-          this.selectedItems = Object.entries(this.selectedItems).filter((itemId) => itemId !== id);
-        } else {
-          this.selectedItems[id] = { "type": type };
-        }
+        this.selectedItems.push({id, type});
       }
       console.log(this.selectedItems);
     },
     clearSelection() {
-      this.selectedFiles = {};
+      this.selectedItems.length = 0;
+    },
+    open(id: string) {
+      this.selectedItems.filter(item => item.id == id).map((item: ItemData) => {
+        //TODO open file / folder
+        // Needs to select the appropriate function to view file/folder
+        openItem(item.id, item.type);
+      });
+    },
+    openFolder(folder: string) {
+      fetch(`http://localhost:8080/files?directory=${folder}`).then(
+        res => res.json()
+      ).then(json => {
+        console.log("data received: ", json);
+        this.$state.items = json;
+      });
     }
   },
 });

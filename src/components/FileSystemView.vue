@@ -22,7 +22,6 @@
 .nav {
   display: flex;
   width: 100%;
-  background-color: #244a68;
   height: 55px;
   align-items: center;
   min-height: 55px;
