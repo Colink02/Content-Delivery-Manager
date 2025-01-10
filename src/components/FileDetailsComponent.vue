@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { useViewState } from "@/stores/view_state";
-import { storeToRefs } from "pinia";
 
-const { selectedFilesAndFolders } = storeToRefs(useViewState());
+const state  = useViewState();
 
 function closeDetails() {
-  useViewState().toggleDetails();
+  state.toggleDetails();
 }
 defineProps(["file_name", "file_type_icon"]);
 </script>

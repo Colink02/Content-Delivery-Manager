@@ -1,16 +1,16 @@
 <script setup lang="ts">
   import { useViewState } from "@/stores/view_state";
-  import { storeToRefs } from "pinia";
-  defineProps(["selectedItems"]);
+  import FileFilter from "@/components/FileFilter.vue";
+  const filters = defineProps(["filters"]);
 
-  const { selectedFilesAndFolders } = storeToRefs(useViewState());
+  const state = useViewState();
 
   function toggleDetails() {
     useViewState().toggleDetails();
   }
 
   function getSelectedItemsCount() {
-    return Object.keys(selectedFilesAndFolders.value).length;
+    return Object.keys(state.selectedFilesAndFolders).length;
   }
 
 </script>
@@ -20,6 +20,7 @@
   <span class="file-controls-selection" v-if="getSelectedItemsCount() > 0">
     <span>{{ getSelectedItemsCount() }} selected</span>
   </span>
+  <FileFilter :filters="filters"/>
   <div class="file-controls-right">
     <a href="#" @click="toggleDetails()">
       <img src="/icons/info.svg" alt="details" :class='["icon", useViewState().showDetails && "icon-active"]'>
@@ -51,5 +52,6 @@
 }
 .file-controls-right {
   float: right;
+  clear: left;
 }
 </style>

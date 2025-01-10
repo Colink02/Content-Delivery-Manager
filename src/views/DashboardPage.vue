@@ -1,6 +1,4 @@
 <script lang="ts">
-import FileView from "@/components/FileView.vue";
-import FolderView from "@/components/FolderView.vue";
 import FileDetailsComponent from "@/components/FileDetailsComponent.vue";
 import FileSystemView from "@/components/FileSystemView.vue";
 import FileControls from "@/components/FileControls.vue";
@@ -22,11 +20,8 @@ async function uploadFile(file: File) {}
 export default {
   components: {
     FileExplorer,
-    FileControls,
     FileSystemView,
     FileDetailsComponent,
-    FolderView,
-    FileView,
   },
   methods: {
     useViewState,
@@ -42,7 +37,6 @@ export default {
     <div id="content">
       <div id="header">
         <FileSystemView></FileSystemView>
-        <FileControls />
       </div>
       <FileExplorer />
     </div>
@@ -54,9 +48,6 @@ export default {
       v-if="useViewState().showDetails"
     ></FileDetailsComponent>
     </Transition>
-    <!--    <div id="file-details">-->
-    <!--      <h1>File Details</h1>-->
-    <!--    </div>-->
   </div>
 </template>
 <style>
@@ -70,13 +61,6 @@ export default {
   display: flex;
   height: 100%;
   color: white;
-}
-#explorer-view {
-  height: 86%;
-  flex-direction: column;
-  display: flex;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 #file-list {
   height: 100%;

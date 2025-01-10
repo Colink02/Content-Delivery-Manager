@@ -19,6 +19,7 @@ type StoreData = {
   selectedItems: ItemData[];
   items: FileSystem;
 }
+
 export const useViewState = defineStore("AppState", {
   state: () => ({
     showDetails: true,
