@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useRoute } from "vue-router";
 
 type ItemData = {
   type: string;
@@ -23,7 +24,7 @@ type StoreData = {
 export const useViewState = defineStore("AppState", {
   state: () => ({
     showDetails: true,
-    currentPath: "",
+    currentPath: useRoute(),
     selectedItems: {},
     items: {}
   } as StoreData),
@@ -39,6 +40,11 @@ export const useViewState = defineStore("AppState", {
     }
   },
   actions: {
+    init() {
+      const route = useRoute();
+      this.$state.currentPath = route.path;
+      console.log("Path is: ", route.path);
+    },
     toggleDetails() {
       this.showDetails = !this.showDetails;
     },
@@ -58,7 +64,7 @@ export const useViewState = defineStore("AppState", {
       this.selectedItems.filter(item => item.id == id).map((item: ItemData) => {
         //TODO open file / folder
         // Needs to select the appropriate function to view file/folder
-        openItem(item.id, item.type);
+        // openItem(item.id, item.type);
       });
     },
     openFolder(folder: string) {

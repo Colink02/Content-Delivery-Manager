@@ -6,24 +6,14 @@ import FileCrumb from "@/components/FileCrumb.vue";
 import { useViewState } from "@/stores/view_state";
 import Empty from "@/components/Empty.vue";
 import FileControls from "@/components/FileControls.vue";
-import { useRouter } from "vue-router";
-import { onMounted } from "vue";
 
 //TODO add explorer state
 const state = useViewState();
-const router = useRouter();
-onMounted(async () => {
-  if(state.currentPath === "") {
-    console.log(router.currentRoute.value);
-    state.currentPath = router.currentRoute.value;
-  }
-});
 const filters = [];
 </script>
 
 <template>
   <div id="explorer-view">
-    <RouterView>
     <div class="toolbar">
       <FileCrumb :path="state.currentPath" />
       <FileControls></FileControls>
@@ -33,7 +23,6 @@ const filters = [];
       <FileView id="file-list" v-if="state.items?.files"></FileView>
       <Empty />
     </div>
-    </RouterView>
   </div>
 </template>
 

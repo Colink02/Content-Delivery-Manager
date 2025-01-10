@@ -8,9 +8,11 @@ const app = createApp(App);
 
 const pinia = createPinia();
 
-pinia.use(({ store }) => {
-  store.router = markRaw(useRouter());
-});
+// pinia.router = useRouter();
+
+// pinia.use(({ store }) => {
+//   store.router = markRaw(useRouter());
+// });
 
 app.use(pinia);
 

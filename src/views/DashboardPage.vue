@@ -1,7 +1,6 @@
 <script lang="ts">
 import FileDetailsComponent from "@/components/FileDetailsComponent.vue";
 import FileSystemView from "@/components/FileSystemView.vue";
-import FileControls from "@/components/FileControls.vue";
 import { useViewState } from "@/stores/view_state";
 import FileExplorer from "@/components/FileExplorer.vue";
 
